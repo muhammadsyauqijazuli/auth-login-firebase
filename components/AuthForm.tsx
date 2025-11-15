@@ -18,9 +18,35 @@ const schemaRegister = z.object({
 
 export default function AuthForm({ mode }: { mode: "login" | "register" }) {
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  function validateField(field: string, value: string) {
+    const schema = mode === "register" ? schemaRegister : schemaLogin;
+    try {
+      schema.pick({ [field]: true } as any).parse({ [field]: value });
+      setFieldErrors(prev => ({ ...prev, [field]: "" }));
+    } catch (err) {
+      if (err instanceof z.ZodError) {
+        setFieldErrors(prev => ({ ...prev, [field]: err.errors[0]?.message || "" }));
+      }
+    }
+  }
+
+  function handleBlur(field: string) {
+    setTouched(prev => ({ ...prev, [field]: true }));
+    validateField(field, form[field as keyof typeof form]);
+  }
+
+  function handleChange(field: string, value: string) {
+    setForm(prev => ({ ...prev, [field]: value }));
+    if (touched[field]) {
+      validateField(field, value);
+    }
+  }
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -53,17 +79,49 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
     <form onSubmit={onSubmit} className="space-y-4">
       {mode === "register" && (
         <div>
-          <label className="label">Nama</label>
-          <input className="input" value={form.name} onChange={(e)=>setForm({ ...form, name: e.target.value })} placeholder="Nama lengkap" />
+          <label htmlFor="name" className="label">Nama</label>
+          <input
+            id="name"
+            className={`input ${touched.name && fieldErrors.name ? "border-red-500 focus:ring-red-200" : ""}`}
+            value={form.name}
+            onChange={(e) => handleChange("name", e.target.value)}
+            onBlur={() => handleBlur("name")}
+            placeholder="Nama lengkap"
+          />
+          {touched.name && fieldErrors.name && (
+            <p className="mt-1 text-xs text-red-600 dark:text-red-400">{fieldErrors.name}</p>
+          )}
         </div>
       )}
       <div>
-        <label className="label">Email</label>
-        <input className="input" type="email" value={form.email} onChange={(e)=>setForm({ ...form, email: e.target.value })} placeholder="email@contoh.com" />
+        <label htmlFor="email" className="label">Email</label>
+        <input
+          id="email"
+          type="email"
+          className={`input ${touched.email && fieldErrors.email ? "border-red-500 focus:ring-red-200" : ""}`}
+          value={form.email}
+          onChange={(e) => handleChange("email", e.target.value)}
+          onBlur={() => handleBlur("email")}
+          placeholder="email@contoh.com"
+        />
+        {touched.email && fieldErrors.email && (
+          <p className="mt-1 text-xs text-red-600 dark:text-red-400">{fieldErrors.email}</p>
+        )}
       </div>
       <div>
-        <label className="label">Password</label>
-        <input className="input" type="password" value={form.password} onChange={(e)=>setForm({ ...form, password: e.target.value })} placeholder="••••••" />
+        <label htmlFor="password" className="label">Password</label>
+        <input
+          id="password"
+          type="password"
+          className={`input ${touched.password && fieldErrors.password ? "border-red-500 focus:ring-red-200" : ""}`}
+          value={form.password}
+          onChange={(e) => handleChange("password", e.target.value)}
+          onBlur={() => handleBlur("password")}
+          placeholder="••••••"
+        />
+        {touched.password && fieldErrors.password && (
+          <p className="mt-1 text-xs text-red-600 dark:text-red-400">{fieldErrors.password}</p>
+        )}
       </div>
       <button className="btn w-full" type="submit" disabled={loading}>{loading ? "Memproses..." : (mode === "login" ? "Masuk" : "Daftar")}</button>
       {error && <p className="text-red-400 text-sm">{error}</p>}

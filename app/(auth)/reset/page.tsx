@@ -13,9 +13,34 @@ export default function ResetPasswordPage() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState<string | null>(null);
+  const [touched, setTouched] = useState(false);
   const [msg, setMsg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loadingReset, setLoadingReset] = useState(false);
+
+  function validateEmail(value: string) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!value) {
+      setEmailError("Email wajib diisi");
+    } else if (!emailRegex.test(value)) {
+      setEmailError("Format email tidak valid");
+    } else {
+      setEmailError(null);
+    }
+  }
+
+  function handleEmailChange(value: string) {
+    setEmail(value);
+    if (touched) {
+      validateEmail(value);
+    }
+  }
+
+  function handleEmailBlur() {
+    setTouched(true);
+    validateEmail(email);
+  }
 
   useEffect(() => {
     if (loading) return;
@@ -25,7 +50,15 @@ export default function ResetPasswordPage() {
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setMsg(null); 
-    setError(null); 
+    setError(null);
+    
+    // Validate before submit
+    validateEmail(email);
+    if (!email || emailError) {
+      setTouched(true);
+      return;
+    }
+    
     setLoadingReset(true);
     
     try {
@@ -88,13 +121,21 @@ export default function ResetPasswordPage() {
                 </label>
                 <input 
                   id="email"
-                  className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                  className={`w-full rounded-lg border px-4 py-3 focus:ring-2 dark:bg-gray-700 dark:text-white ${
+                    touched && emailError
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-200"
+                      : "border-gray-300 focus:border-blue-500 focus:ring-blue-200 dark:border-gray-600"
+                  }`}
                   type="email" 
                   required 
                   value={email} 
-                  onChange={(e)=>setEmail(e.target.value)} 
+                  onChange={(e) => handleEmailChange(e.target.value)}
+                  onBlur={handleEmailBlur}
                   placeholder="email@contoh.com" 
                 />
+                {touched && emailError && (
+                  <p className="mt-1 text-xs text-red-600 dark:text-red-400">{emailError}</p>
+                )}
               </div>
               
               <button 
