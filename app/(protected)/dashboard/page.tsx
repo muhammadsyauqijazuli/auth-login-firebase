@@ -67,7 +67,7 @@ export default function DashboardPage() {
       <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           {/* Header Section */}
-          <div className="mb-8">
+          <div className="mb-8 animate-fade-in">
             <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
               <div className="flex items-center gap-4">
                 <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-500 to-purple-600 text-xl font-bold text-white shadow-lg">
@@ -92,7 +92,7 @@ export default function DashboardPage() {
 
           {/* Stats & Quick Actions */}
           <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-4">
-            <div className="rounded-2xl bg-white p-6 shadow-sm dark:bg-gray-800">
+            <div className="animate-slide-up rounded-2xl bg-white p-6 shadow-sm dark:bg-gray-800 hover:shadow-lg hover:scale-105 transition-all duration-300" style={{animationDelay: '0.1s', animationFillMode: 'backwards'}}>
               <div className="flex items-center gap-4">
                 <div className="rounded-xl bg-blue-100 p-3 dark:bg-blue-900">
                   <span className="text-2xl">📝</span>
@@ -104,7 +104,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-white p-6 shadow-sm dark:bg-gray-800">
+            <div className="animate-slide-up rounded-2xl bg-white p-6 shadow-sm dark:bg-gray-800 hover:shadow-lg hover:scale-105 transition-all duration-300" style={{animationDelay: '0.2s', animationFillMode: 'backwards'}}>
               <div className="flex items-center gap-4">
                 <div className="rounded-xl bg-green-100 p-3 dark:bg-green-900">
                   <span className="text-2xl">👤</span>
@@ -116,7 +116,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-white p-6 shadow-sm dark:bg-gray-800">
+            <div className="animate-slide-up rounded-2xl bg-white p-6 shadow-sm dark:bg-gray-800 hover:shadow-lg hover:scale-105 transition-all duration-300" style={{animationDelay: '0.3s', animationFillMode: 'backwards'}}>
               <div className="flex items-center gap-4">
                 <div className="rounded-xl bg-purple-100 p-3 dark:bg-purple-900">
                   <span className="text-2xl">🕒</span>
@@ -128,7 +128,7 @@ export default function DashboardPage() {
               </div>
             </div>
 
-            <div className="rounded-2xl bg-white p-6 shadow-sm dark:bg-gray-800">
+            <div className="animate-slide-up rounded-2xl bg-white p-6 shadow-sm dark:bg-gray-800 hover:shadow-lg hover:scale-105 transition-all duration-300" style={{animationDelay: '0.4s', animationFillMode: 'backwards'}}>
               <div className="flex items-center gap-4">
                 <div className="rounded-xl bg-orange-100 p-3 dark:bg-orange-900">
                   <span className="text-2xl">🔐</span>
@@ -145,7 +145,7 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Notes Section */}
             <div className="lg:col-span-2">
-              <div className="rounded-2xl bg-white shadow-sm dark:bg-gray-800">
+              <div className="animate-slide-up rounded-2xl bg-white shadow-sm dark:bg-gray-800" style={{animationDelay: '0.5s', animationFillMode: 'backwards'}}>
                 <div className="border-b border-gray-200 px-6 py-4 dark:border-gray-700">
                   <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Catatan Saya</h2>
                   <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
@@ -202,10 +202,11 @@ export default function DashboardPage() {
                     </div>
                   ) : (
                     <div className="space-y-4">
-                      {items.map((note) => (
+                      {items.map((note, index) => (
                         <div
                           key={note.id}
-                          className="group rounded-xl border border-gray-200 bg-gray-50 p-4 hover:border-blue-300 hover:shadow-md transition-all duration-200 dark:border-gray-600 dark:bg-gray-700"
+                          className="group rounded-xl border border-gray-200 bg-gray-50 p-4 hover:border-blue-300 hover:shadow-md hover:scale-[1.02] transition-all duration-200 dark:border-gray-600 dark:bg-gray-700 animate-scale-in"
+                          style={{animationDelay: `${index * 0.05}s`, animationFillMode: 'backwards'}}
                         >
                           <div className="flex items-start justify-between">
                             <p className="text-gray-800 dark:text-gray-200 flex-1">

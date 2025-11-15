@@ -107,7 +107,7 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
             placeholder="Nama lengkap"
           />
           {touched.name && fieldErrors.name && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{fieldErrors.name}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400 animate-fade-in">{fieldErrors.name}</p>
           )}
         </div>
       )}
@@ -126,7 +126,7 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
           placeholder="email@contoh.com"
         />
         {touched.email && fieldErrors.email && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{fieldErrors.email}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400 animate-fade-in">{fieldErrors.email}</p>
         )}
       </div>
       
@@ -144,12 +144,12 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
           placeholder="••••••"
         />
         {touched.password && fieldErrors.password && (
-          <p className="mt-1 text-sm text-red-600 dark:text-red-400">{fieldErrors.password}</p>
+          <p className="mt-1 text-sm text-red-600 dark:text-red-400 animate-fade-in">{fieldErrors.password}</p>
         )}
         
         {/* Password Strength Indicator (register only) */}
         {mode === "register" && form.password && (
-          <div className="mt-2">
+          <div className="mt-2 animate-fade-in">
             <div className="flex items-center gap-2 mb-1">
               <div className="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-600">
                 <div 
@@ -185,16 +185,16 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
             value={form.confirmPassword}
             onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })}
             onBlur={() => handleBlur("confirmPassword")}
-            placeholder="••••••"
+          placeholder="••••••"
           />
           {touched.confirmPassword && fieldErrors.confirmPassword && (
-            <p className="mt-1 text-sm text-red-600 dark:text-red-400">{fieldErrors.confirmPassword}</p>
+            <p className="mt-1 text-sm text-red-600 dark:text-red-400 animate-fade-in">{fieldErrors.confirmPassword}</p>
           )}
         </div>
       )}
       
       <button
-        className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
+        className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 flex items-center justify-center gap-2"
         type="submit"
         disabled={loading}
       >

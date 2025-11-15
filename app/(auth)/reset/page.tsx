@@ -68,10 +68,10 @@ export default function ResetPasswordPage() {
       <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center p-4">
         <div className="w-full max-w-md">
           {/* Card */}
-          <div className="rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800">
+          <div className="animate-slide-up rounded-2xl bg-white p-8 shadow-xl dark:bg-gray-800">
             {/* Header */}
-            <div className="mb-8 text-center">
-              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 mb-4">
+            <div className="mb-8 text-center animate-fade-in">
+              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900 mb-4 animate-bounce-subtle">
                 <span className="text-xl">🔐</span>
               </div>
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white">

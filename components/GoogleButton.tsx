@@ -43,11 +43,11 @@ export default function GoogleButton() {
 
   return (
     <div>
-      <button onClick={onClick} className="btn w-full flex items-center justify-center gap-2" disabled={loading}>
+      <button onClick={onClick} className="btn w-full flex items-center justify-center gap-2 hover:scale-[1.02] transition-all duration-200" disabled={loading}>
         {loading && <LoadingSpinner size="sm" />}
         {loading ? "Memproses..." : "Masuk dengan Google"}
       </button>
-      {error && <p className="mt-2 text-sm text-red-400">{error}</p>}
+      {error && <p className="mt-2 text-sm text-red-400 animate-fade-in">{error}</p>}
     </div>
   );
 }
