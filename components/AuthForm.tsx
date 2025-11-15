@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { auth } from "@/lib/firebase";
 import { mapAuthError } from "@/lib/auth";
 import { useRouter } from "next/navigation";
+import PasswordStrengthIndicator from "@/components/PasswordStrengthIndicator";
 
 const base = {
   email: z.string().email("Format email tidak valid"),
@@ -13,7 +14,8 @@ const base = {
 const schemaLogin = z.object(base);
 const schemaRegister = z.object({
   name: z.string().min(2, "Nama minimal 2 karakter"),
-  ...base,
+  email: z.string().email("Format email tidak valid"),
+  password: z.string().min(8, "Minimal 8 karakter untuk keamanan lebih baik"),
 });
 
 export default function AuthForm({ mode }: { mode: "login" | "register" }) {
@@ -64,6 +66,7 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
       <div>
         <label className="label">Password</label>
         <input className="input" type="password" value={form.password} onChange={(e)=>setForm({ ...form, password: e.target.value })} placeholder="••••••" />
+        {mode === "register" && <PasswordStrengthIndicator password={form.password} />}
       </div>
       <button className="btn w-full" type="submit" disabled={loading}>{loading ? "Memproses..." : (mode === "login" ? "Masuk" : "Daftar")}</button>
       {error && <p className="text-red-400 text-sm">{error}</p>}
