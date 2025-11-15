@@ -1,6 +1,6 @@
-# dzkra-auth (Next.js + Firebase)
+# Authify (Next.js + Firebase)
 
-A simple auth starter using Next.js (App Router), Firebase Authentication (Email/Password + Google), and Firestore example. Optimized for easy deploy to Vercel.
+A modern authentication starter built with Next.js (App Router), Firebase Authentication (Email/Password + Google), and Firestore. Optimized for easy deployment to Vercel.
 
 ## Fitur
 - Email & Password: daftar, login, reset password

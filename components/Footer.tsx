@@ -9,9 +9,9 @@ export default function Footer() {
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div className="flex items-center gap-2">
               <div className="flex h-6 w-6 items-center justify-center rounded bg-gradient-to-r from-blue-500 to-purple-600 text-xs text-white">
-                D
+                A
               </div>
-              <span className="font-semibold text-gray-900 dark:text-white">Dzkra</span>
+              <span className="font-semibold text-gray-900 dark:text-white">Authify</span>
             </div>
             
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-gray-600 dark:text-gray-400">
@@ -30,7 +30,7 @@ export default function Footer() {
             </div>
             
             <div className="text-sm text-gray-500 dark:text-gray-400">
-              © {new Date().getFullYear()} Dzkra. All rights reserved.
+              © {new Date().getFullYear()} Authify. All rights reserved.
             </div>
           </div>
         </div>

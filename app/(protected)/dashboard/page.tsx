@@ -5,6 +5,7 @@ import Protected from "@/components/Protected";
 import { addDoc, collection, onSnapshot, query, serverTimestamp, deleteDoc, doc, orderBy } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import Navbar from "@/components/Navbar";
+import EmailVerificationBanner from "@/components/EmailVerificationBanner";
 
 export default function DashboardPage() {
   const { user } = useAuth();
@@ -59,6 +60,7 @@ export default function DashboardPage() {
   return (
     <Protected>
       <Navbar />
+      <EmailVerificationBanner />
       <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           {/* Header Section */}
