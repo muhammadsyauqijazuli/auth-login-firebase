@@ -16,6 +16,8 @@ export default function ResetPasswordPage() {
   const [msg, setMsg] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loadingReset, setLoadingReset] = useState(false);
+  
+  const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   useEffect(() => {
     if (loading) return;
@@ -99,7 +101,7 @@ export default function ResetPasswordPage() {
               
               <button 
                 className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
-                disabled={loadingReset} 
+                disabled={loadingReset || !email.trim() || !isEmailValid} 
                 type="submit"
               >
                 {loadingReset ? "Mengirim..." : "Kirim Email Reset"}

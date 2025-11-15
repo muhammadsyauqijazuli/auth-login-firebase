@@ -20,7 +20,7 @@ export default function Protected({ children, requireVerified = false }: Protect
       return;
     }
     if (requireVerified && !user.emailVerified) {
-      router.replace("/login?reason=unverified");
+      router.replace("/verify-email");
     }
   }, [user, loading, router, requireVerified]);
 

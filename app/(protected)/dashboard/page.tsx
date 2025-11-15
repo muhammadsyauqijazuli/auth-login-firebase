@@ -12,6 +12,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(false);
   type Note = { id: string; text?: string; uid?: string; createdAt?: any };
   const [items, setItems] = useState<Note[]>([]);
+  const MAX_NOTE_LENGTH = 500;
 
   useEffect(() => {
     if (!user) return;
@@ -46,6 +47,10 @@ export default function DashboardPage() {
 
   async function deleteNote(noteId: string) {
     if (!user) return;
+    
+    const confirmed = window.confirm("Yakin ingin menghapus catatan ini?");
+    if (!confirmed) return;
+    
     try {
       await deleteDoc(doc(db, "notes", noteId));
     } catch (error) {
@@ -158,15 +163,24 @@ export default function DashboardPage() {
                       <textarea
                         id="note"
                         rows={3}
+                        maxLength={MAX_NOTE_LENGTH}
                         className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                         placeholder="Tulis catatan Anda di sini..."
                         value={text}
                         onChange={(e) => setText(e.target.value)}
                       />
+                      <div className="mt-1 flex justify-between text-xs">
+                        <span className="text-gray-500 dark:text-gray-400">
+                          💡 Max {MAX_NOTE_LENGTH} karakter
+                        </span>
+                        <span className={`${text.length > MAX_NOTE_LENGTH * 0.9 ? 'text-orange-600 font-medium' : 'text-gray-500 dark:text-gray-400'}`}>
+                          {text.length}/{MAX_NOTE_LENGTH}
+                        </span>
+                      </div>
                     </div>
                     <button
                       type="submit"
-                      disabled={loading || !text.trim()}
+                      disabled={loading || !text.trim() || text.length > MAX_NOTE_LENGTH}
                       className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-4 rounded-lg font-medium hover:from-blue-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
                     >
                       {loading ? "Menambah..." : "Tambah Catatan"}
