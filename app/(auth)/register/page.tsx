@@ -27,9 +27,9 @@ export default function RegisterPage() {
               className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white"
             >
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-r from-blue-500 to-purple-600 text-white text-sm">
-                D
+                A
               </div>
-              <span>Dzkra</span>
+              <span>Authify</span>
             </Link>
             <div className="text-sm text-gray-600 dark:text-gray-400">
               Sudah punya akun?{" "}
