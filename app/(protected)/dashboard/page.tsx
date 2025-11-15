@@ -57,7 +57,7 @@ export default function DashboardPage() {
   const initials = displayName.split(/\s+/).slice(0,2).map(s=>s[0]?.toUpperCase()).join("");
 
   return (
-    <Protected>
+    <Protected requireVerified>
       <Navbar />
       <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
