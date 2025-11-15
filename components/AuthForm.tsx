@@ -5,6 +5,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfi
 import { auth } from "@/lib/firebase";
 import { mapAuthError } from "@/lib/auth";
 import { useRouter } from "next/navigation";
+import LoadingSpinner from "./LoadingSpinner";
 
 const base = {
   email: z.string().email("Format email tidak valid"),
@@ -65,7 +66,10 @@ export default function AuthForm({ mode }: { mode: "login" | "register" }) {
         <label className="label">Password</label>
         <input className="input" type="password" value={form.password} onChange={(e)=>setForm({ ...form, password: e.target.value })} placeholder="••••••" />
       </div>
-      <button className="btn w-full" type="submit" disabled={loading}>{loading ? "Memproses..." : (mode === "login" ? "Masuk" : "Daftar")}</button>
+      <button className="btn w-full flex items-center justify-center gap-2" type="submit" disabled={loading}>
+        {loading && <LoadingSpinner size="sm" />}
+        {loading ? "Memproses..." : (mode === "login" ? "Masuk" : "Daftar")}
+      </button>
       {error && <p className="text-red-400 text-sm">{error}</p>}
     </form>
   );

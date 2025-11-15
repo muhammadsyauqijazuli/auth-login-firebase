@@ -4,6 +4,7 @@ import { auth } from "@/lib/firebase";
 import { mapAuthError } from "@/lib/auth";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import LoadingSpinner from "./LoadingSpinner";
 
 export default function GoogleButton() {
   const [error, setError] = useState<string | null>(null);
@@ -42,7 +43,8 @@ export default function GoogleButton() {
 
   return (
     <div>
-      <button onClick={onClick} className="btn w-full" disabled={loading}>
+      <button onClick={onClick} className="btn w-full flex items-center justify-center gap-2" disabled={loading}>
+        {loading && <LoadingSpinner size="sm" />}
         {loading ? "Memproses..." : "Masuk dengan Google"}
       </button>
       {error && <p className="mt-2 text-sm text-red-400">{error}</p>}

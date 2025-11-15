@@ -4,8 +4,12 @@ import { AuthProvider } from "@/context/AuthContext";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "Auth Demo | dzkra",
-  description: "Login system with Firebase (Next.js)",
+  title: "Authify - Modern Authentication System",
+  description: "Secure, production-ready authentication powered by Firebase and Next.js. Email/Password + Google Sign-In with comprehensive security features.",
+  icons: {
+    icon: "/favicon.svg",
+    apple: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
